@@ -1,4 +1,4 @@
-﻿const Discord = require("discord.js");
+const Discord = require("discord.js");
 const bot = new Discord.Client();
 const prefix = "!";
 var fs = require('fs');
@@ -8,7 +8,7 @@ const config = require("./config.json");
 
 bot.on("ready", () => {
 	console.log(`Logged in as ${bot.user.tag}!`);
-	bot.user.setActivity('Baboula Game!', { type: 'playing' });
+	bot.user.setActivity('Baboula things', { type: 'playing' });
 
 	if (!fs.existsSync('./users')) {
 		fs.mkdirSync('./users');
@@ -53,24 +53,24 @@ bot.on("message", message => {
 			userpointss++;
 			var userpoint = userpointss;
 			
-			//message.channel.send(`Todays Baboula winner is <@${randomMember}> with ${userpoint} points.`);
+			//message.channel.send(`Hey <@${randomMember}> has ${userpoint} baboula points.`);
 			fs.writeFileSync(`users/${randomMember}`, `${userpoint}`, null, 2, 'utf-8');
 
 			let embedMSG22={
 				'color': 0x0793F5,
-				'description': `Today's Baboula winner is <@${randomMember}> with ${userpoint} points.`,
+				'description': `Hey <@${randomMember}> has ${userpoint} baboula points.`,
 			};
 			message.channel.send({embed: embedMSG22}).catch(console.error);
 
 		}
 
 		if (!savedusers.includes(randomMember)) {
-			//message.channel.send(`Todays Baboula winner is <@${randomMember}> with 1 point.`);
+			//message.channel.send(`<@${randomMember}> just got 1 Baboula point.`);
 			fs.writeFileSync(`users/${randomMember}`, JSON.stringify(1, null, 2), 'utf-8');
 			
 			let embedMSG22={
 				'color': 0x0793F5,
-				'description': `Today's Baboula winner is <@${randomMember}> with 1 point.`,
+				'description': `<@${randomMember}> just got 1 Baboula point.`,
 			};
 			message.channel.send({embed: embedMSG22}).catch(console.error);
 		}
@@ -78,7 +78,7 @@ bot.on("message", message => {
 
 	}
 
-	if (command === 'baboulaleaderboard') {
+	if (command === 'baboulaboard') {
 		//if (message.member.id !== "121919842382118914") return;
 		if (!message.member.roles.has(config.roleidforcomamnds)) return;
 		
@@ -93,7 +93,7 @@ bot.on("message", message => {
 		}
 		
 		const getSecondFileName = (pathToFolder) => {
-			let secondFileWithLargestInteger;
+			let secondFileWithLargestInteger
 			const files = fs.readdirSync(pathToFolder);
 			const arrLength = files.length;
 			const content = files.map(f => +fs.readFileSync(`${pathToFolder}/${f}`, 'UTF-8'));
@@ -169,31 +169,31 @@ bot.on("message", message => {
 		
 			let embedMSG1={
 				'color': 0x45b6fe,
-				'title': 'LeaderBoard of BABOULA gamers.',
+				'title': 'Baboula Leaderboard',
 			};
 			message.channel.send({embed: embedMSG1}).catch(console.error);
 			
 			let embedMSG={
 				'color': 0xFFD700,
-				'title': 'First player:',
+				'title': 'First place:',
 				'thumbnail': {'url': 'https://imgur.com/54A7CpJ.png'},
-				'description': `1st Baboula player is <@${getFileWithLargestInteger(`users/`)}> with ${getFileWhichHasLargestInteger(`users/`)} points.`
+				'description': `1st Place Baboula is <@${getFileWithLargestInteger(`users/`)}> with ${getFileWhichHasLargestInteger(`users/`)} points.`
 			};
 			message.channel.send({embed: embedMSG}).catch(console.error);
 
 			let embedMS={
 				'color': 0xC0C0C0,
-				'title': 'Second player:',
+				'title': 'Second place:',
 				'thumbnail': {'url': 'https://imgur.com/mU8Jxp2.png'},
-				'description': `2nd Baboula player is <@${getSecondFileName(`users/`)}> with ${getFileWithSecondHighestIntegrer(`users/`)} points.`
+				'description': `2nd Place Baboula is <@${getSecondFileName(`users/`)}> with ${getFileWithSecondHighestIntegrer(`users/`)} points.`
 			};
 			message.channel.send({embed: embedMS}).catch(console.error);
 			
 			let embedM={
 				'color': 0xcd7f32,
-				'title': 'Third player:',
+				'title': 'Third place:',
 				'thumbnail': {'url': 'https://imgur.com/1i6xFkU.png'},
-				'description': `3rd Baboula player is <@${getThirdFileName(`users/`)}> with ${getFileWithThirdHighestIntegrer(`users/`)} points.`
+				'description': `3rd Place Baboula is <@${getThirdFileName(`users/`)}> with ${getFileWithThirdHighestIntegrer(`users/`)} points.`
 			};
 			message.channel.send({embed: embedM}).catch(console.error);
 
@@ -223,7 +223,7 @@ bot.on("message", message => {
 		
 		let embedMSG2={
 				'color': 0x0793F5,
-				'title': 'The King is:',
+				'title': 'The Baboula King is:',
 				'thumbnail': {'url': 'https://imgur.com/4cB00xr.png'},
 				'description': `<@${getFileWithLargestInteger(`users/`)}> with ${getFileWhichHasLargestInteger(`users/`)} points`
 			};
@@ -252,7 +252,7 @@ bot.on("message", message => {
 		
 		let embedMSG11={
 				'color': 0x0793F5,
-				'description': 'Database with Baboula Gameres were cleared.\nKing lost his role.',
+				'description': 'All of the Baboula Points were cleared.\nKing lost their role.',
 			};
 			message.channel.send({embed: embedMSG11}).catch(console.error);
 			
