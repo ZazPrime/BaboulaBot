@@ -142,7 +142,7 @@ bot.on("message", message => {
 		  return largestInteger;		  
 		}
 	
-		const getFileWithSecondHighestIntegrer = (pathToFolder) => {
+		const getFileWithSecondHighestInteger = (pathToFolder) => {
 		  const files = fs.readdirSync(pathToFolder);
 		  const content = files.map(f => +fs.readFileSync(`${pathToFolder}/${f}`, 'UTF-8'));
 		  const arrayCopy = [...content];
@@ -154,7 +154,7 @@ bot.on("message", message => {
 		  return secondLargestNum;		  
 		}
 		
-		const getFileWithThirdHighestIntegrer = (pathToFolder) => {
+		const getFileWithThirdHighestInteger = (pathToFolder) => {
 		  const files = fs.readdirSync(pathToFolder);
 		  const content = files.map(f => +fs.readFileSync(`${pathToFolder}/${f}`, 'UTF-8'));
 		  const arrayCopy = [...content];
@@ -185,7 +185,7 @@ bot.on("message", message => {
 				'color': 0xC0C0C0,
 				'title': 'Second place:',
 				'thumbnail': {'url': 'https://imgur.com/mU8Jxp2.png'},
-				'description': `2nd Place Baboula is <@${getSecondFileName(`users/`)}> with ${getFileWithSecondHighestIntegrer(`users/`)} points.`
+				'description': `2nd Place Baboula is <@${getSecondFileName(`users/`)}> with ${getFileWithSecondHighestInteger(`users/`)} points.`
 			};
 			message.channel.send({embed: embedMS}).catch(console.error);
 			
@@ -193,7 +193,7 @@ bot.on("message", message => {
 				'color': 0xcd7f32,
 				'title': 'Third place:',
 				'thumbnail': {'url': 'https://imgur.com/1i6xFkU.png'},
-				'description': `3rd Place Baboula is <@${getThirdFileName(`users/`)}> with ${getFileWithThirdHighestIntegrer(`users/`)} points.`
+				'description': `3rd Place Baboula is <@${getThirdFileName(`users/`)}> with ${getFileWithThirdHighestInteger(`users/`)} points.`
 			};
 			message.channel.send({embed: embedM}).catch(console.error);
 
@@ -244,7 +244,7 @@ bot.on("message", message => {
 			member.roles.find(x => x.name === "Baboula King")
 		).map(member => member.user.id)
 	
-		//every member with Baboula King role looses a king role
+		//every member with Baboula King role loses a king role
 		membersWithRole.forEach(element => { 
 		  let baboulaking = message.guild.members.get(element); 
 		  baboulaking.removeRole(config.kingidrole);
